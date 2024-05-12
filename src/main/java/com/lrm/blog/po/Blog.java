@@ -46,7 +46,7 @@ public class Blog {
 
     private String description;
 
-    //空构造
+   
     public Blog() {
     }
 
