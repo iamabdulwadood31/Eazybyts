@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
-    //Sort - 从最新往下排序
+    
      List<Comment> findByBlogIdAndParentCommentNull(Long blogId, Sort sort);
 }
