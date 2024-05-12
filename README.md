@@ -1,5 +1,5 @@
-# Personal Website
+#  Website
 
 ## Introduction
-A personal website using Java(Spring Boot), HTML/CSS, JavaScript languages.
+A website using Java(Spring Boot), HTML/CSS, JavaScript languages.
 
