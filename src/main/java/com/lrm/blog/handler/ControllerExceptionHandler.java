@@ -17,14 +17,14 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ModelAndView exceptionHandler(HttpServletRequest request, Exception e) throws Exception {
-        //1. 记录异常
+       
         logger.error("Request URL : {}, Exception : {}", request.getRequestURL(), e);
 
-        //3.具体情况
+      
         if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null) {
             throw e;
         }
-        // 2.
+        
         ModelAndView mv = new ModelAndView();
         mv.addObject("url", request.getRequestURL());
         mv.addObject("exception", e);
