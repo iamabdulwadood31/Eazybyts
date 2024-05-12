@@ -11,7 +11,7 @@ public interface TypeRepository extends JpaRepository<Type,Long> {
 
       Type findByName(String name);
 
-      //自定义查询
+  
       @Query("select t from Type t")
       List<Type> findTop(Pageable pageable);
 
