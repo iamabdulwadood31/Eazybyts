@@ -26,7 +26,7 @@ import java.util.*;
 @Service
 public class BlogServiceImpl implements BlogService{
 
-    //注入repository
+   
     @Autowired
     private BlogRepository blogRepository;
 
@@ -56,23 +56,20 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public Page<Blog> listBlog(Pageable pageable, BlogQuery blog) {
         return blogRepository.findAll(new Specification<Blog>() {
-            //处理动态查询的条件 - toPredicate
-            // Root - 代表你要查询的对象是哪一个
-            // CriteriaQuery - 查询条件的容器- 把条件放进这个容器里面
-            // CriteriaBuilder - 设置具体某个条件的表达式
+          
             @Override
             public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
                 List<Predicate> predicates = new ArrayList<>();
-                //非空判断 - 添加标题
+                
                 if ( !"".equals(blog.getTitle()) && blog.getTitle() != null){
                     predicates.add(cb.like(root.<String>get("title"),"%" + blog.getTitle() + "%"));
                 }
 
-                //若type分类ID为非空
+              
                 if (blog.getTypeId() != null){
                     predicates.add(cb.equal(root.<Type>get("type").get("id"), blog.getTypeId()));
                 }
-                //选中为true的时候查询是否推荐 - *******blog.isRecommend())
+                
                 if (blog.isRecommend()){
                     predicates.add(cb.equal(root.<Boolean>get("recommend"), blog.isRecommend()));
                 }
@@ -121,14 +118,14 @@ public class BlogServiceImpl implements BlogService{
     @Transactional
     @Override
     public Blog saveBlog(Blog blog) {
-        //新增
+        
         if (blog.getId() == null){
-            //需要初始化
+        
             blog.setCreateTime(new Date());
             blog.setUpdateTime(new Date());
             blog.setViews(0);
         }else {
-            //不是新增 - 就只用设置修改时间
+      
             blog.setUpdateTime(new Date());
         }
         return blogRepository.save(blog);
@@ -141,7 +138,7 @@ public class BlogServiceImpl implements BlogService{
         if (b == null){
             throw new NotFoundException("Blog not exists!");
         }
-        //blog保存到b
+      
         BeanUtils.copyProperties(blog,b, MyBeanUtils.getNullPropertyNames(blog));
         b.setUpdateTime(new Date());
         return blogRepository.save(b);
