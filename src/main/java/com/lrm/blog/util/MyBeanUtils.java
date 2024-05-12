@@ -9,11 +9,7 @@ import java.util.List;
 
 public class MyBeanUtils {
 
-    /**
-     * 获取所有的属性值为空属性名数组
-     * @param source
-     * @return
-     */
+    
 
     public static String[] getNullPropertyNames(Object source){
         BeanWrapper beanWrapper = new BeanWrapperImpl(source);
